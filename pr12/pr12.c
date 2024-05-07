@@ -19,10 +19,10 @@ typedef struct Student {
     int chemistryGrade;
 } Student;
 
-typedef struct Stasik {
+typedef struct UniversalPointers {
     struct List* list;
     struct Student* student;
-} Stasik;
+} UniversalPointers;
 typedef struct List {
     Node* head;
     Node* tail;
@@ -40,25 +40,25 @@ void* PrintList(void*);
 void* FreeList(void*);
 
 void* Append(void* args) {
-    Stasik* stasik = (Stasik*)args;
+    UniversalPointers* universalpointers = (UniversalPointers*)args;
     Node* newNode = malloc(sizeof(Node));
-    newNode->student = stasik -> student;
+    newNode->student = universalpointers -> student;
     newNode->next = NULL;
 
-    if (stasik -> list->size == 0) {
-        stasik -> list->head = newNode;
-        stasik -> list->tail = stasik -> list->head;
+    if (universalpointers -> list->size == 0) {
+        universalpointers -> list->head = newNode;
+        universalpointers -> list->tail = universalpointers -> list->head;
     }
     else {
-        stasik -> list->tail->next = newNode;
-        stasik -> list->tail = newNode;
+        universalpointers -> list->tail->next = newNode;
+        universalpointers -> list->tail = newNode;
     }
-    stasik -> list->size++;
+    universalpointers -> list->size++;
 }
 
 void* PrintExcellentFemaleStudents(void* args) {
-    Stasik* stasik = (Stasik*)args;
-    Node* current = stasik->list ->head;
+    UniversalPointers* universalpointers = (UniversalPointers*)args;
+    Node* current = universalpointers->list ->head;
     while (current != NULL) {
         if (strcmp(current->student->gender, "жен") == 0 && current->student->physicGrade == 5 && current->student->chemistryGrade == 5) {
             printf("Name: %s %s\n", current->student->name, current->student->surname);
@@ -98,8 +98,8 @@ Student* InitStudent(int age, char* name, char* surname, char* gender, char* gro
 }
 
 void* PrintList(void* args) {
-    Stasik* stasik = (Stasik*)args;
-    Node* current = stasik->list->head;
+    UniversalPointers* universalpointers = (UniversalPointers*)args;
+    Node* current = universalpointers->list->head;
     while (current != NULL) {
         printf("%s - %d\n", current->student->name, current->student->physicGrade);
         current = current->next;
@@ -107,29 +107,29 @@ void* PrintList(void* args) {
 }
 
 void* FreeList(void* args) {
-    Stasik* stasik = (Stasik*)args;
-    Node* current = stasik->list->head;
+    UniversalPointers* universalpointers = (UniversalPointers*)args;
+    Node* current = universalpointers->list->head;
     while (current != NULL) {
         Node* temp = current;
         current = current->next;
         free(temp->student);
         free(temp);
     }
-    free(stasik->list);
+    free(universalpointers->list);
 }
 
 int main() {
-    Stasik* stasik = malloc(sizeof (Stasik));
+    UniversalPointers* universalpointers = malloc(sizeof (UniversalPointers));
     setlocale(LC_ALL, "RUS");
     List* StudentList = InitList();
-    stasik->list = StudentList;
-    stasik->student = InitStudent(23, "Ksenia", "Tfgd", "жен", "ghgjf4", 4, 5, 5);
-    StudentList->append(stasik);
-    stasik->student = InitStudent(14, "Vaho", "Tfgd", "муж", "ghgjf4", 4, 4, 3);
-    StudentList->append(stasik);
-    stasik->student = InitStudent(17, "Timur", "Tfgd", "муж", "ghgjf4", 4, 3, 3);
-    StudentList->append(stasik);
-    StudentList->printE(stasik);
+    universalpointers->list = StudentList;
+    universalpointers->student = InitStudent(23, "Ksenia", "Tfgd", "жен", "ghgjf4", 4, 5, 5);
+    StudentList->append(universalpointers);
+    universalpointers->student = InitStudent(14, "Vaho", "Tfgd", "муж", "ghgjf4", 4, 4, 3);
+    StudentList->append(universalpointers);
+    universalpointers->student = InitStudent(17, "Timur", "Tfgd", "муж", "ghgjf4", 4, 3, 3);
+    StudentList->append(universalpointers);
+    StudentList->printE(universalpointers);
 
     StudentList->free(StudentList);
     return 0;
