@@ -1,0 +1,5 @@
+D:/programming/CLionProjects/C/pr15/cmake-build-debug/CMakeFiles/pr15.dir
+D:/programming/CLionProjects/C/pr15/cmake-build-debug/CMakeFiles/package.dir
+D:/programming/CLionProjects/C/pr15/cmake-build-debug/CMakeFiles/package_source.dir
+D:/programming/CLionProjects/C/pr15/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/programming/CLionProjects/C/pr15/cmake-build-debug/CMakeFiles/rebuild_cache.dir
